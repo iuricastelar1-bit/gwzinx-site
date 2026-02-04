@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>danx auxílio</title>
+<style>
+body{
+    background:black;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    font-family:Arial;
+    color:white;
+}
+
+.panel{
+    width:380px;
+    padding:20px;
+    border-radius:15px;
+    border:2px solid red;
+    box-shadow:0 0 25px red;
+    background:#0a0a0a;
+}
+
+h2{ text-align:center; color:red; }
+
+.tabs{
+    display:flex;
+    gap:10px;
+    margin-bottom:15px;
+}
+
+.tab{
+    flex:1;
+    text-align:center;
+    padding:8px;
+    border-radius:8px;
+    border:1px solid red;
+    color:red;
+    cursor:pointer;
+}
+
+.tab.active{
+    background:red;
+    color:black;
+}
+
+.section{ display:none; }
+.section.active{ display:block; }
+
+.option{
+    display:flex;
+    align-items:center;
+    justify-content:flex-start;
+    gap:10px;
+    margin:10px 0;
+}
+
+.option input{
+    margin:0;
+}
+
+.slider-box{ margin:15px 0; }
+.slider-box span{ float:right; }
+
+input[type="range"]{ width:100%; }
+
+.config-btn{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:10px;
+    border:1px solid #333;
+    border-radius:8px;
+    margin:8px 0;
+    cursor:pointer;
+}
+
+.config-btn.active{
+    border-color:#00aaff;
+    color:#00aaff;
+    box-shadow:0 0 10px #00aaff;
+}
+
+.inject{
+    margin-top:15px;
+    width:100%;
+    padding:12px;
+    border-radius:10px;
+    background:red;
+    color:black;
+    font-weight:bold;
+    border:none;
+    font-size:16px;
+    cursor:pointer;
+}
+
+input{
+    width:100%;
+    padding:10px;
+    margin:10px 0;
+    border-radius:8px;
+    border:none;
+}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="login" class="panel">
+    <h2>Digite a senha</h2>
+    <input id="pass" type="password" placeholder="Senha">
+    <button class="inject" onclick="entrar()">ENTRAR</button>
+</div>
+
+<!-- APP -->
+<div id="app" class="panel" style="display:none;">
+    <h2>danx auxílio</h2>
+
+    <div class="tabs">
+        <div class="tab active" onclick="openTab(0)">Aimbot</div>
+        <div class="tab" onclick="openTab(1)">Config</div>
+        <div class="tab" onclick="openTab(2)">Extra</div>
+    </div>
+
+    <!-- Aimbot -->
+    <div class="section active">
+        <div class="option">
+            <input type="checkbox"> Silent Aim
+        </div>
+
+        <div class="option">
+            <input type="checkbox"> Aim Smooth
+        </div>
+
+        <div class="slider-box">
+            <label>FOV <span id="fov">50</span></label>
+            <input type="range" min="0" max="100" value="50"
+            oninput="fov.innerText=this.value">
+        </div>
+
+        <div class="option">
+            <input type="radio" name="mode" checked> Ao Olhar
+        </div>
+        <div class="option">
+            <input type="radio" name="mode"> Ao Atirar
+        </div>
+    </div>
+
+    <!-- Config -->
+    <div class="section">
+        <div class="config-btn" onclick="toggle(this)">
+            Mira calibrada <span>✔️</span>
+        </div>
+        <div class="config-btn" onclick="toggle(this)">
+            Mira suave <span>✔️</span>
+        </div>
+        <div class="config-btn" onclick="toggle(this)">
+            Ativar aimbot <span>✔️</span>
+        </div>
+        <div class="config-btn" onclick="toggle(this)">
+            Ativar precisão <span>✔️</span>
+        </div>
+    </div>
+
+    <!-- Extra -->
+    <div class="section">
+        <div class="config-btn" onclick="toggle(this)">
+            Ativar Headtrick <span>✔️</span>
+        </div>
+        <div class="config-btn" onclick="toggle(this)">
+            Ativar precisão <span>✔️</span>
+        </div>
+        <div class="config-btn" onclick="toggle(this)">
+            Otimização <span>✔️</span>
+        </div>
+    </div>
+
+    <!-- BOTÃO QUE ABRE O FREE FIRE -->
+    <button class="inject" onclick="abrirFreeFire()">ATIVAR</button>
+</div>
+
+<script>
+function entrar(){
+    if(pass.value === "danx123aux"){
+        login.style.display="none";
+        app.style.display="block";
+    }else{
+        alert("Senha incorreta");
+    }
+}
+
+function openTab(i){
+    let tabs=document.querySelectorAll(".tab");
+    let secs=document.querySelectorAll(".section");
+    tabs.forEach(t=>t.classList.remove("active"));
+    secs.forEach(s=>s.classList.remove("active"));
+    tabs[i].classList.add("active");
+    secs[i].classList.add("active");
+}
+
+function toggle(el){
+    el.classList.toggle("active");
+}
+
+// FUNÇÃO PRA ABRIR O FREE FIRE
+function abrirFreeFire() {
+    const links = [
+      'freefire://',
+      'intent://com.dts.freefiremax#Intent;scheme=freefire;package=com.dts.freefiremax;end',
+      'intent://com.dts.freefiremax/com.dts.freefiremax.FFMainActivity#Intent;scheme=freefire;package=com.dts.freefiremax;end',
+      'com.dts.freefiremax://',
+      'freefire://com.dts.freefiremax'
+    ];
+    for (let link of links) {
+      setTimeout(() => {
+        window.location.href = link;
+      }, 300);
+    }
+}
+</script>
+
+</body>
+</html>
